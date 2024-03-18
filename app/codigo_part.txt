@@ -1,0 +1,51 @@
+""" from flask import Flask, jsonify
+import requests
+
+app = Flask(__name__)
+
+@app.route('/characters')
+def get_characters():
+    api_url = 'https://rickandmortyapi.com/api/character'
+    response = requests.get(api_url)
+    data = response.json()
+    return response.json()
+    
+
+if __name__ == '__main__':
+    app.run(debug=True) """
+
+
+
+
+
+
+_________________________Part-2 Estudo_____________________________________________
+
+
+
+from flask import Flask, jsonify
+import requests
+
+app = Flask(__name__)
+
+@app.route('/characters')
+def get_characters():
+    rick = 'https://rickandmortyapi.com/api/character'
+    response = requests.get(rick)
+    data = response.json()
+
+    characters_info = []
+    for character in data['results']:
+        character_info = {
+            'name': character['name'],
+            'image': character['image'],
+            'decription': character['status'] + ' - ' + character['species']
+        
+        }
+    
+        characters_info.append(character_info)
+    
+    return jsonify(characters_info)
+
+if __name__ == '__main__':
+    app.run(debug=True)
